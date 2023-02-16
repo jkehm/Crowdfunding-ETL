@@ -1,5 +1,5 @@
 ﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
--- Link to schema: https://app.quickdatabasediagrams.com/#/d/bwN5Jf
+-- Link to schema: https://app.quickdatabasediagrams.com/?code=7c395a78a63150c574d0#/d/bwN5Jf
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
 
@@ -49,6 +49,17 @@ CREATE TABLE "subcategory" (
      )
 );
 
+CREATE TABLE "backers" (
+    "backer_id" varchar(10)   NOT NULL,
+    "cf_id" int   NOT NULL,
+    "first_name" varchar(50)   NOT NULL,
+    "last_name" varchar(50)   NOT NULL,
+    "email" varchar(50)   NOT NULL,
+    CONSTRAINT "pk_backers" PRIMARY KEY (
+        "backer_id"
+     )
+);
+
 ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_contact_id" FOREIGN KEY("contact_id")
 REFERENCES "contacts" ("contact_id");
 
@@ -58,4 +69,6 @@ REFERENCES "category" ("category_id");
 ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_subcategory_id" FOREIGN KEY("subcategory_id")
 REFERENCES "subcategory" ("subcategory_id");
 
-SELECT * FROM subcategory;
+ALTER TABLE "backers" ADD CONSTRAINT "fk_backers_cf_id" FOREIGN KEY("cf_id")
+REFERENCES "campaign" ("cf_id");
+
